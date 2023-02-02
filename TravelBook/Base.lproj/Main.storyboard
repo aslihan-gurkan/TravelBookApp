@@ -66,7 +66,7 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Save">
-                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle0"/>
+                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="saveButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gPY-1N-0vQ"/>
@@ -100,6 +100,7 @@
                         <outlet property="commentText" destination="ibz-TB-Qgd" id="Fj3-PF-R9O"/>
                         <outlet property="mapView" destination="xyO-7T-bl0" id="FxX-cH-1wm"/>
                         <outlet property="nameText" destination="69b-wH-lmy" id="GCJ-6c-OkZ"/>
+                        <outlet property="saveButton" destination="t8o-Yb-Kez" id="hbz-9e-c1m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

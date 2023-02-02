@@ -16,6 +16,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBOutlet weak var nameText: UITextField!
     @IBOutlet weak var commentText: UITextField!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var saveButton: UIButton!
     
     var locationManager = CLLocationManager()
     var chosenLattitude = Double()
@@ -38,14 +39,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
-        
+    
         //pin koyma: kullanıcı haritanın bir noktasına basılı tutacak ve orası pinlenecek
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(chooseLocation(gestureRecognizer: )))
         //user 2 sn basılı tutunca pinlensin
         gestureRecognizer.minimumPressDuration = 3
         mapView.addGestureRecognizer((gestureRecognizer))
         
+        
+        saveButton.isEnabled = false
         if selectedTitle != "" {
+            
             //CoreData
             
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -102,8 +106,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         } else {
             
         }
+        let keyboardGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(keyboardGestureRecognizer)
     }
     
+    @objc func hideKeyboard() {
+        view.endEditing(true)
+    }
     
     @objc func chooseLocation(gestureRecognizer:UILongPressGestureRecognizer) {
         //pin oluşturmak için tıklanan yerin koordinatlar alınmalı ->
@@ -119,6 +128,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             annotation.title = nameText.text
             annotation.subtitle = commentText.text
             self.mapView.addAnnotation(annotation)
+             
+            if nameText.text != "" {
+                if commentText.text != "" {
+                    saveButton.isEnabled = true
+                }
+            }
         }
     }
 
